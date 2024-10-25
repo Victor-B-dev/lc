@@ -73,6 +73,46 @@ Look up reference equality versus value equality.
 
 */
 
+// 2- hash table/map - regular object
+
+var isAnagramHashTable = function (s, t) {
+    if (s.length !== t.length) {
+        return false;
+    }
+
+    const countS = {};
+    const countT = {};
+    for (let i = 0; i < s.length; i++) {
+        countS[s[i]] = (countS[s[i]] || 0) + 1;
+        countT[t[i]] = (countT[t[i]] || 0) + 1;
+    }
+
+    for (const key in countS) {
+        if (countS[key] !== countT[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/*
+So here we have a hashtable/hashmap (in JS you don't need to use the Map object & it's a bit easier to read/remember the syntax for) not unlike twoSum's. Either way the important part is we are caching our answers into a better data structure for faster lookup for comparisons.
+
+The natural inclination of course is to make a hashmap for each string. 
+We iterate through the length of the strings (which are the same so line 85 which begins the loop should can be either s or t) and count every letter (s[i] or t[i] respectively) by either first setting it (hence the || 0) and adding 1 OR calling the value then adding 1 to it. So the key value pairs in the objects are the letter being the key and the index being the count number.
+
+This ++ iterating should be familar even if the syntax is not.
+
+In the next loop, we make a comparison of the values of the letters. 
+E.g. How many A's are there? How many B's are there? All the value returns should be the same.
+
+Note this is faster than the previous because again hashmap lookup and insertions are O(1), the entire constraint is on how long the original strings are. 
+
+Sorting time complexity is quite variable and in actual practice may be faster if there's not much to sort.
+*/
+
+
+// hashmap variant - also optimized for space
 var isAnagramHashMap = function(s, t) {
     if (s.length !== t.length) return false;
 
@@ -92,3 +132,14 @@ var isAnagramHashMap = function(s, t) {
 
    return true;
 }
+
+/* Note the syntax has changed to be that of the Map object BUT let's talk about the trick with the space complexity.
+
+We are only making one hashmap that we fill with the character counts of one string using the same logic of either adding the character at 1 value or getting the count and iterating on it.
+
+Then we subtract the character count of the other string from the values. We do this because if the character counts are meant to be identical then +X then subtracting X later we should expect 0 for every single character count at the end.
+
+Of course there's an early escape of if the character doesn't exist in the map already since they are supposed to be anagrams.
+
+Extra note: this strategy is very similar to using a stack for matching pairs (see valid parentheses questions under stacks), but also wildly applicable any time you need to do a comparison between two things that resolve into one thing as an answer.
+*/
