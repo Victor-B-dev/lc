@@ -130,3 +130,10 @@ It's concise & in my opinion, easier to read once you learn.
 Regex is contained in the //
 What the command is saying = test if the character begins (^) with characters in any of these ranges [a-z] [A-Z] [0-9]
 */
+
+// Bonus - reverse string with regex - Two Liner
+
+var isPalindromeReverseRegex = function(s) {
+  let newStr = s.replace(/[^a-z0-9]/gi,"").toLowerCase(); // the i flag makes it case insensitive
+  return newStr.split("").reverse().join("") === newStr ? true : false;
+};
