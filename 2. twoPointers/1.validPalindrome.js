@@ -31,8 +31,22 @@ Constraints:
 
 */
 
-// Reversing string
+// Reversing the string
+
+/* We can make a new string that iterates through the string and reverses it.
+We still need to check for the alphanumeric.
+
+However this takes up additional space to store the string, so enter the two pointer strat for a solution that takes less space complexity.
+
+*/
 
 // Two Pointers - ASCII conversion
+/* This hint is provided by the constraint & also related back to the groupAnagrams problem in arrayshashing.
+We can check the value of a character to see if it is in the continguous ranges of alphanumeric characters (i.e. we know the ascii values of alphanumeric characters fall in 3 ranges, if it's not in any of those ranges, it's not alphanumeric)
+
+*/
 
 // Two Pointers - Regex
+/* We can also use regex to check for alphanumeric characters, not provided by the constraint, just some food for thought.
+
+*/
