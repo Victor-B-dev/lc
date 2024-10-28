@@ -33,7 +33,7 @@ Constraints:
 
 // Reversing the string - ASCII conversion
 
-var validPalindrome = function (s) {
+var validPalindromeReverse = function (s) {
   let sanitizedStr = "";
   
   // return a true or false based on alphanumeric
@@ -45,8 +45,8 @@ var validPalindrome = function (s) {
 
   // sanitize the original string by checking every string if its alphanumeric, if it is, add it to the revers
   for (let char of s){
-    if (this.isAlphanumeric(char)){
-      sanitizedStr =+ char.toLowerCase();
+    if (isAlphanumeric(char)){
+      sanitizedStr += char.toLowerCase();
     }
   }
 
@@ -65,7 +65,28 @@ As usual with JS, it's a bit limited with string methods so we need to convert i
 However this solution takes up additional space to store the new string, so enter the two pointer strat for a solution that takes less space complexity.
 */
 
-// Two Pointers 
+// Two Pointers
+var validPalindromeTwoPointer = function (s) {
+
+  // return a true or false based on alphanumeric
+  const isAlphanumeric = (char) => {
+    return ((char >= 'a' && char <= 'z') || 
+    (char >= 'A' && char <= 'Z') || 
+    (char >= '0' && char <= '9'))
+  }
+
+  // sanitize the original string by checking every string if its alphanumeric, if it is, add it to the revers
+  for (let char of s){
+    if (this.isAlphanumeric(char)){
+      sanitizedStr =+ char.toLowerCase();
+    }
+  }
+
+  // compare the sanitized string with its reversed version
+  return sanitizedStr === sanitizedStr.split("").reverse().join("");
+}
+
+
 /* 
 
 */
