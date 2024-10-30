@@ -35,8 +35,16 @@ var longestConsecutiveBruteForce = function (nums) {
   return res;
 }
 
-/* Note this answer would be unacceptable due to the request in the problem itself for asking for O(n) time.
+/* Note this answer would be unacceptable due to the problem asking for O(n) time.
+We create a hashset out of the given array.
+We check each number in the array against the hashset.
+If the number exists in the hash set, then we see if the +1 (next conse #) is also in the hashset. If it is, we check the next and also iterate the streak counter.
 
+The problem lies in that we are checking every single number of the given array and then "re-doing" work when checking for consecutive numbers.
+Ex - [100,4,200,1,3,2]
+From outside looking in, we know that the longest streak will be 4 because 1-2-3-4 are in the array but because the information is not considered, our code does additional work from not making use of contextual information (additional conditions). 
+
+This leads us to a more optimized solution, sorting.
 */
 
 // Sorting 
@@ -44,6 +52,7 @@ var longestConsecutiveSort = function (nums) {
   if (nums.length === 0) {
       return 0;
   }
+
   nums.sort((a, b) => a - b);
   
   let res = 0, curr = nums[0], streak = 0, i = 0;
@@ -63,7 +72,10 @@ var longestConsecutiveSort = function (nums) {
   return res;
 }
 
-/*
+/* Here we added an easy early return (don't try to run code if the array is empty) that could've been included in the brute force.
+
+
+
 Time - O(nlogn)
 Space - O(1) 
 
@@ -75,7 +87,7 @@ var longestConsecutiveHashSet = function(nums) {
   const numSet = new Set(nums);
   let longest = 0;
 
-  for (let num of numSet) {
+  for (let num of nums) {
       if (!numSet.has(num - 1)) {
           let length = 1;
           while (numSet.has(num + length)) {
