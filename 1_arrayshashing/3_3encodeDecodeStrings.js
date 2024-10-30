@@ -28,7 +28,7 @@ strs[i] contains only UTF-8 characters.
 const encode = (strs) => {
   let result = '';
   for (let s of strs) {
-      result += `${s.length}#${s}`;
+      result += `${s.length}#${s}`; // encode in the oorder of number, # , string
   }
   return result;
 }
@@ -38,15 +38,15 @@ const decode = (str) => {
   let i = 0;
 
   while (i < str.length) {
-      let j = i;
-      while (str[j] !== '#') {
+      let j = i; // initialize pointers
+      while (str[j] !== '#') { // find the delimiter with second pointer, the substring before the # is the length of the string after the # from the way we encoded
           j++;
       }
-      let length = parseInt(str.substring(i, j), 10);
-      i = j + 1;
-      j = i + length;
-      result.push(str.substring(i, j));
-      i = j;
+      let length = parseInt(str.substring(i, j), 10); // take the encoded length value that is a substring and turn it into a number
+      i = j + 1; // move one pointer to after the delimiter #
+      j = i + length; // move the second ponter for the length of the string that was decodedi n line 45
+      result.push(str.substring(i, j)); // push that substring into the result array
+      i = j; // move the first pointer to the end of the string & repeat
   }
   return result;
 }
