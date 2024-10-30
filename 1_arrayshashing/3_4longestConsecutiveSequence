@@ -1,0 +1,116 @@
+// Leetcode problem # 128
+/*
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+You must write an algorithm that runs in O(n) time.
+
+Example 1:
+Input: nums = [100,4,200,1,3,2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+
+Example 2:
+Input: nums = [0,3,7,2,5,8,4,6,0,1]
+Output: 9
+
+Constraints:
+    0 <= nums.length <= 105
+    -109 <= nums[i] <= 109
+*/
+
+// 1. Brute Force
+
+var longestConsecutiveBruteForce = function (nums) {
+  let res = 0;
+  const store = new Set(nums);
+
+  for (let num of nums) {
+      let streak = 0, curr = num;
+      while (store.has(curr)) {
+          streak++;
+          curr++;
+      }
+      res = Math.max(res, streak);
+  }
+  return res;
+}
+
+/* Note this answer would be unacceptable due to the request in the problem itself for asking for O(n) time.
+
+*/
+
+// Sorting 
+var longestConsecutiveSort = function (nums) {
+  if (nums.length === 0) {
+      return 0;
+  }
+  nums.sort((a, b) => a - b);
+  
+  let res = 0, curr = nums[0], streak = 0, i = 0;
+
+  while (i < nums.length) {
+      if (curr !== nums[i]) {
+          curr = nums[i];
+          streak = 0;
+      }
+      while (i < nums.length && nums[i] === curr) {
+          i++;
+      }
+      streak++;
+      curr++;
+      res = Math.max(res, streak);
+  }
+  return res;
+}
+
+/*
+Time - O(nlogn)
+Space - O(1) 
+
+*/
+
+// 3. hash Set
+
+var longestConsecutiveHashSet = function(nums) {
+  const numSet = new Set(nums);
+  let longest = 0;
+
+  for (let num of numSet) {
+      if (!numSet.has(num - 1)) {
+          let length = 1;
+          while (numSet.has(num + length)) {
+              length++;
+          }
+          longest = Math.max(longest, length);
+      }
+  }
+  return longest;
+}
+
+/* Better than sorting but takes up additional space
+Time - O(n)
+Space - O(n)
+
+*/
+
+
+// 4. Hashmap answer
+
+var longestConsecutive = function(nums) {
+  const numMap = new Map();
+  let longest = 0;
+
+  for (let num of nums) {
+      if (!numMap.has(num)) {
+          numMap.set(num, (numMap.get(num - 1) || 0) + (numMap.get(num + 1) || 0) + 1);
+          numMap.set(num - (numMap.get(num - 1) || 0), numMap.get(num));
+          numMap.set(num + (numMap.get(num + 1) || 0), numMap.get(num));
+          longest = Math.max(longest, numMap.get(num));
+      }
+  }
+  return longest;
+};
+
+/* Similar to the hashset answer without the hashset rulesets.
+
+*/
