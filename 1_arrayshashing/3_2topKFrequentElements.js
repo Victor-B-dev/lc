@@ -41,6 +41,38 @@ The tricky thing here is realizing we can turn the map into an array & then flip
 Sorting causes the logN addition to the time complexity
 */
 
+// Bucket sort - still a hashmap
+
+var topKFrequent = function(nums, k) {
+  const count = {};
+  const freq = Array.from({ length: nums.length + 1 }, () => []);
+
+  for (const n of nums) { // create counting map
+      count[n] = (count[n] || 0) + 1;
+  }
+
+  for (const n in count) { // add the numbers from the map into proper bucket
+      freq[count[n]].push(parseInt(n));
+  }
+
+  const res = [];
+  for (let i = freq.length - 1; i > 0; i--) { // push from the buckets for K times
+      for (const n of freq[i]) {
+          res.push(n);
+          if (res.length === k) { //when it reaches K times, return the result
+              return res;
+          }
+      }
+  }
+};
+
+/* We are using contextual information about the answer sought to do the sorting in a faster manner.
+We know for each number that it appears at minimum once & a maximum frequency that a number can occur is the length of the array.
+
+Therefore we set the range of the counts (frequency/the keys) from 0 - nums.length + 1 (since length is 0 indexed) & we also create an empty array as the bucket. (line 48)
+
+Please note bucket sort only really works with bounded indexes & that it only really works with a good distribution of the inputs across the range. It slows down if all the sorting ends up in the same bucket. 
+*/
+
 // Heap 
 
-// Bucket sort - Hashmap
