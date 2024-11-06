@@ -22,6 +22,39 @@ Follow up: Can you solve the problem in O(1) extra space complexity? (The output
 
 // Brute Force
 
+const productExceptSelfBF = (nums) => {
+  const result = [];
+
+  for (let i = 0; i < nums.length; i++){
+    let product = 1;
+    for (let j=0; j< nums.length; j++){
+      if (i !== j) {
+        product *= nums[j];
+      }
+    }
+    result.push(product);
+  }
+  return result;
+}
+
+// Full double loop means O(n^2). Can easily do better.
+
 // Division
+
+const productExceptSelfDiv = (nums) => {
+  const result = [];
+
+  for (let i = 0; i < nums.length; i++){
+    let product = 1;
+    for (let j=0; j< nums.length; j++){
+      if (i !== j) {
+        product *= nums[j];
+      }
+    }
+    result.push(product);
+  }
+  return result;
+}
+
 
 // Prefix Suffix (Optimized)
