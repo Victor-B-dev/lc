@@ -20,14 +20,14 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
 */
 
-// Brute Force
+// 1. Brute Force
 
 const productExceptSelfBF = (nums) => {
   const result = [];
 
   for (let i = 0; i < nums.length; i++){
     let product = 1;
-    for (let j=0; j< nums.length; j++){
+    for (let j = 0; j< nums.length; j++){
       if (i !== j) {
         product *= nums[j];
       }
@@ -39,22 +39,27 @@ const productExceptSelfBF = (nums) => {
 
 // Full double loop means O(n^2). Can easily do better.
 
-// Division
-
-const productExceptSelfDiv = (nums) => {
+// 2. Division
+const productExceptSelfDivSimple = (nums) => {
   const result = [];
+  let product = 1;
 
   for (let i = 0; i < nums.length; i++){
-    let product = 1;
-    for (let j=0; j< nums.length; j++){
-      if (i !== j) {
-        product *= nums[j];
-      }
-    }
-    result.push(product);
+    product *= nums[i];
   }
-  return result;
+
+  for (let i = 0; i < nums.length; i++){
+    result.push(product / nums[i]);
+  }
+
+  return result
 }
 
+/* This is probably the intuitive answer one would think to do were it not for the constraint to not use division.
+We know each total product is multiplying all numbers so dividing by each number afterwards doesnt have us figuring out the total product every time.
+Redundant work.
 
-// Prefix Suffix (Optimized)
+I want to note that there is an obvious mathematical edge case here that should be accounted for but I want to show that as a separate solution.
+*/
+
+// 3. Prefix Suffix (Optimized)
