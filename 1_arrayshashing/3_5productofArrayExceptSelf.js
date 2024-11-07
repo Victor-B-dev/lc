@@ -102,3 +102,30 @@ Because those edge cases break the function completely, the logic flow is as sho
 */
 
 // 3. Prefix Suffix (Optimized)
+
+const productExceptSelfPrefixSuffix = (nums) => {
+  const result = new Array(nums.length).fill(1);
+  // if we looked at what is being asked of us, we can see each side of the current number being excluded as a prefix and suffix. therefore we can run two loops to find the prefixes and suffixes then multiply them together
+
+  // "out of bounds" or ignoring a position can be represented as a 1 since that does not change the product
+
+  for (let i = 1; i < nums.length; i++) { // we start at 1 instead of 0 because the first result value will exclude the 0 index position in the product
+      result[i] = res[i - 1] * nums[i - 1]; // to find each prefix (the numbers before the current position) it is every position as we iterate to the right is the previous position multipled by the next number in the nums.
+  }
+  
+  let suffix = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+      result[i] *= suffix; // the post fix is done is basically prefix but done in reverse
+      suffix *= nums[i];
+  }
+  return result;
+}
+
+/* Note the constraint says the result array is not considered additional space.
+So storing any value needs to be in the result array.
+Therefore we calculate all the prefixes first and store them in the result array.
+
+Then we iterate through the suffixes and multiply them into the array.
+
+The tricky part with this implementation is making sure the start/end values of each loop is correct.
+*/
