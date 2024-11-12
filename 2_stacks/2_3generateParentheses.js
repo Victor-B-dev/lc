@@ -16,7 +16,7 @@ Constraints:
 
 */
 
-// Solution
+// Solution - backtracking
 
 var generateParenthesis = function(n) {
   const result = [];
@@ -37,3 +37,5 @@ let backtrack = (n, openN, closedN, current, result) => {
       backtrack(n, openN, closedN + 1, current + ')', result);
   }
 }
+
+// need to move to backtracking when topic is eventually added. conceptualization as a stack solution still feels like a mess
