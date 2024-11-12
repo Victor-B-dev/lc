@@ -19,3 +19,21 @@ Constraints:
 1 <= temperatures.length <= 105
 30 <= temperatures[i] <= 100
 */
+
+// Solution
+
+var dailyTemperatures = function(temperatures) {
+  const result = new Array(temperatures.length).fill(0);
+  const stack = []; // pair: [temp, index]
+
+  for (let i = 0; i < temperatures.length; i++) {
+      const t = temperatures[i];
+      while (stack.length > 0 && t > stack[stack.length - 1][0]) {
+          const [stackT, prevIndex] = stack.pop();
+          result[prevIndex] = i - prevIndex;
+      }
+      stack.push([t, i]);
+  }
+  return result;
+};
+
