@@ -33,7 +33,7 @@ var dailyTemperatures = function(temperatures) {
   for (let i = 0; i < temperatures.length; i++) {
       const t = temperatures[i];
       while (stack.length > 0 && t > stack[stack.length - 1][0]) { // we loop through each day and check if the temperature is warmer than any previous day in teh stack
-          const [stackT, prevIndex] = stack.pop();  // if it's great, we pop the top of the stack, repeatedly doing so since it's a whiel loop
+          const [stackTempature, prevIndex] = stack.pop();  // if it's great, we pop the top of the stack, repeatedly doing so since it's a whiel loop; note that this line is a destructuring of the stack values. we do this to easily access prevIndex for the next line.
           result[prevIndex] = i - prevIndex; // update the result array with the difference in indices
       }
       stack.push([t, i]); // add the current temp then onto the stack and resume
@@ -45,4 +45,11 @@ var dailyTemperatures = function(temperatures) {
 
 Similar to minStack we are going to track the value of differences as part of the stack.
 
+In reference to line 36 we could do something like const [, prevIndex] = stack.pop() but that's a little hard to read and realize it's a destructuring. It's also why it lints if you're in vscode.
+
+similar without destructuring you could do
+const poppedElement = stack.pop()
+const prevIndex = popped[1]
+
+then the rest of the code is the same
 */
