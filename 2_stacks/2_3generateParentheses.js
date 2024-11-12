@@ -15,3 +15,25 @@ Constraints:
 1 <= n <= 8
 
 */
+
+// Solution
+
+var generateParenthesis = function(n) {
+  const result = [];
+  backtrack(n, 0, 0, '', result);
+  return result;
+}
+
+let backtrack = (n, openN, closedN, current, result) => {
+  if (openN === closedN && openN === n) {
+      result.push(current);
+      return;
+  }
+
+  if (openN < n) {
+      backtrack(n, openN + 1, closedN, current + '(', result);
+  }
+  if (closedN < openN) {
+      backtrack(n, openN, closedN + 1, current + ')', result);
+  }
+}
