@@ -20,6 +20,10 @@ Constraints:
 30 <= temperatures[i] <= 100
 */
 
+/* Brute force solution is doing a basic comparison of each position until a less number is found.
+Obviously inefficient.
+*/
+
 // Solution
 
 var dailyTemperatures = function(temperatures) {
@@ -28,12 +32,17 @@ var dailyTemperatures = function(temperatures) {
 
   for (let i = 0; i < temperatures.length; i++) {
       const t = temperatures[i];
-      while (stack.length > 0 && t > stack[stack.length - 1][0]) {
-          const [stackT, prevIndex] = stack.pop();
-          result[prevIndex] = i - prevIndex;
+      while (stack.length > 0 && t > stack[stack.length - 1][0]) { // we loop through each day and check if the temperature is warmer than any previous day in teh stack
+          const [stackT, prevIndex] = stack.pop();  // if it's great, we pop the top of the stack, repeatedly doing so since it's a whiel loop
+          result[prevIndex] = i - prevIndex; // update the result array with the difference in indices
       }
-      stack.push([t, i]);
+      stack.push([t, i]); // add the current temp then onto the stack and resume
   }
   return result;
 };
 
+/* Looking back at previous array/hashing solution, we can utilize a similar approach as productOfArrayexceptSelf with a prefilled array to track the solution. The trick here is we are utilizing previous values.
+
+Similar to minStack we are going to track the value of differences as part of the stack.
+
+*/
