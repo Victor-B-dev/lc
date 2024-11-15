@@ -40,11 +40,31 @@ This automatically precludes using the previous solution with a similar leetcode
 */
 
 // 1. Brute Force Solution
+var twoSumBF = function (numbers, target) {
+  for (let i =0; i < numbers.length; i++){
+    for (letj = i + 1; j< numbers.length; j++){
+      if (numbers[i] + numbers[j] === target){
+        return [i + 1, j + 1 ]
+      }
+    }
+  }
+}
 
-/* Two For loops, obviously poor choice. On^2. But at minimum brute forcing means at least you understand the base problem, and now you need to manpiulate the information further.
+/* Two For loops, obviously poor choice. On^2. But at minimum brute forcing means at least you understand the base problem, and now you need to manpiulate the information further for an optimal solution.
 */
 
 // 2. Hashmap 
+var twoSumHM = function (numbers, target){
+  const prevNums = new Map()
+  for (let i = 0; i< numbers.length; i++){
+    const difference = target - numbers[i];
+    if (prevNums.has(difference)){
+      return [prevNums.get(difference), i + 1];
+    }
+    prevNums.set(numbers[i], i + 1); // the store of values is [difference, index +1], highly recommend writing out this in plain english when practicing storing information
+  }
+  return []; // if no pair solution found, empty array
+}
 
 /* You can look at twoSum again for how a hashmap works perfectly for this (previous inputs can be checked at O(1)), however the constraint with memory is still there.
 So we are going to learn about another approach (obvious by the folder this is in).
@@ -52,5 +72,24 @@ So we are going to learn about another approach (obvious by the folder this is i
 
 // 3. Two Pointer - Optimal
 
-/*
+var twoSumTP = function (numbers,target) {
+  let left = 0, right = numbers.length -1;
+
+  while (left < right) {
+    const currentSum = numbers[left] + numbers[right];
+
+    if (currentSum > target) {
+      right--;
+    } else if (currentSum < target ){
+      left++
+    } else {
+      return [left + 1, right + 1];
+    }
+  }
+  return []
+}
+/* This solution requires the numbers to be sorted.
+When they are sorted, we know that from the right numbers are always greater so we decrement, and from the left we can increment.
+
+Btw you can also do this problem with binary search but you search introduces log n complexity.
 */
