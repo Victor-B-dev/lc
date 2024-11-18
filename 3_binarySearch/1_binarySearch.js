@@ -38,6 +38,10 @@ var searchRecursive = function (nums, target) {
   var binarySearch = function (left, right, nums, target) { // helper function
     if (left > right ) return -1;
     let middle = Math.floor ((left + right) / 2); // go to the middle
+    /* There's also an integer overflow issue if the left and right values are extremely high. the workaround is as follows:
+
+    middle = left + ((right - left) / 2); adding half the distance between them to the left index
+    */
 
     if (nums[middle] === target) return middle; // if the middle is the target, escape 
     if (nums[middle] < target) { // if the middle number is less than the target
