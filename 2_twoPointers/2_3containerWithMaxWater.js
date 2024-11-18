@@ -20,3 +20,62 @@ n == height.length
 0 <= height[i] <= 104
 
 */
+
+/* Understanding the question is a bit.
+
+What you're trying to do is create the max area that can be obtained (imagine an XY graph) where the Y values are the integers given in the heights array.
+
+A container has a left and right so naturally we will need a type of two pointers solution.
+*/
+
+// Brute Force
+
+var maxAreaBF = function (heights) {
+  let res = 0;
+  for (let i = 0; i < heights.length; i++) {
+      for (let j = i + 1; j < heights.length; j++) {
+          res = Math.max(res, Math.min(heights[i], heights[j]) * (j - i));
+      }
+  }
+  return res;
+}
+
+/* Brute force -
+The brute force is just two loops iterating through where the left (first pointer) is stationary and the right runs through the array to make the containers.
+
+Checking every combination is inefficient so how do we write the logic to make it smarter?
+
+Well we know a container is going to have a left and right, so the biggest container would need to start at X = 0 and y = heights - 1. If there is a bigger container, it'll be within those bounds.
+*/
+
+// Two Pointers
+
+var maxAreaTP = function (heights) {
+  let left = 0;
+  let right = heights.length - 1;
+  let result = 0;
+
+  while (left < right){
+    const area = Math.min(heights[left], heights[r]) * (right - left); // height vs width
+    result = Math.max(result, area); // comparing previous result and potential new container with greater area
+    if (heights[left] <= heights[r]){ // until the pointers meet
+      l++; // increment the left to do the comparison
+    } else{
+      r--; // otherwise increment the right
+    }
+  }
+
+  return result;
+}
+
+/* If we draw out the XY graph, we can observe the constraint in getting larger areas is the smaller points in the graph.
+
+Therefore we want to skip the smaller heights and only do comparisons(calculating an area) when the next point is larger, otherwise we continue.
+
+For example in the example given Input: height = [1,8,6,2,5,4,8,3,7], when iterating from 1 -> 8, we see 8 is greater than 1 so we do the recalulation of the area then, but 8 -> 6 is lower. 
+
+So we stop the left pointer and start the right pointer decrementing. 7 -> 3 is lower, so we skip 3 and see 7->8. So we recalculate the max area and compare to the previous max area.
+
+I'd also like to point out in line 61-64, one may be curious why there isn't a comparison for if height[left] > height[right] then r-- but if think about the line, it's actually the same as the else statement in line 64.
+*/
+
