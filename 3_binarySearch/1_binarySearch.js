@@ -78,3 +78,13 @@ var searchIterative = function (nums, target){
 
 /*
 */
+
+// Built in tool
+
+var searchIndexOf = function(nums, target) {
+  
+  return nums.indexOf(target)
+}
+
+/* without writing the logic itself, indexOf is behind the scenes, a binary search
+*/
