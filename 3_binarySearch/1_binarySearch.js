@@ -31,7 +31,7 @@ Binary searches usually rely on the input array being sorted because part of the
 As such future problems will rely on us learning about sorting.
 */
 
-// Recursive BFS
+// Recursive Binary Search
 
 var searchRecursive = function (nums, target) {
 
@@ -57,7 +57,7 @@ var searchRecursive = function (nums, target) {
 /* We will probably not end up using this solution often since recursion takes up extra space since additional recursive calls take up memory until it reaches base case.
 */
 
-// Iterative BFS
+// Iterative Binary Search
 
 var searchIterative = function (nums, target){
   let left = 0
@@ -76,7 +76,7 @@ var searchIterative = function (nums, target){
   return -1; // if target isn't found, return -1 per problem instruction, however note return -1 is a very common way to show something isn't found e.g. indexOf() method
 }
 
-/*
+/* In this version, since we're not recursively calling but "dumping" prior space used, the space complexity is O(1).
 */
 
 // Built in tool
@@ -87,4 +87,11 @@ var searchIndexOf = function(nums, target) {
 }
 
 /* without writing the logic itself, indexOf is behind the scenes, a binary search
+*/
+
+/* One last note is that is common terminology that while something may not be in the input array, we may want to find the closest element to that target.
+
+In this case you may the "lower bound" or "upper bound" result of a target so you can narrow down future search results.
+
+There's good use cases of not exact but close enough that is likely encountered scenarios.
 */
