@@ -31,7 +31,7 @@ Binary searches usually rely on the input array being sorted because part of the
 As such future problems will rely on us learning about sorting.
 */
 
-// Solution - Recursive BFS
+// Recursive BFS
 
 var searchRecursive = function (nums, target) {
 
@@ -44,7 +44,7 @@ var searchRecursive = function (nums, target) {
     */
 
     if (nums[middle] === target) return middle; // if the middle is the target, escape 
-    if (nums[middle] < target) { // if the middle number is less than the target
+    if (target > nums[middle]) { // if target is greater than the middle
       return binarySearch(middle + 1, right, nums, target) // recursiveley search to the right
     } else {
       return binarySearch(left, middle - 1, nums, target) // otherwise search to the left, you could also write the converse of this situation
@@ -53,3 +53,28 @@ var searchRecursive = function (nums, target) {
 
   return binarySearch(0, nums.length - 1, nums, target) // call helper function on input
 }
+
+/* We will probably not end up using this solution often since recursion takes up extra space since additional recursive calls take up memory until it reaches base case.
+*/
+
+// Iterative BFS
+
+var searchIterative = function (nums, target){
+  let left = 0
+  let right = nums.length - 1;
+
+  while (left <= right){
+    let middle = Math.floor ((left + right) / 2);
+    if (target < nums[middle]) { // if the target is less than the middle
+      right = middle - 1; // we move the right pointer to the left of the middle point - 1 so we search the left where the target is
+    } else if (target > nums[middle]) { // if the target is greater than the midpoint
+      left = middle + 1; // we we shift the left pointer
+    } else {
+      return middle // eventually the only number remaining should be the middle 
+    }
+  }
+  return -1; // if target isn't found, return -1 per problem instruction, however note return -1 is a very common way to show something isn't found e.g. indexOf() method
+}
+
+/*
+*/
