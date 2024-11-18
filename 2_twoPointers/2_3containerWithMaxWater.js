@@ -50,18 +50,18 @@ Well we know a container is going to have a left and right, so the biggest conta
 
 // Two Pointers
 
-var maxAreaTP = function (heights) {
+var maxAreaTP = function (height) {
   let left = 0;
-  let right = heights.length - 1;
+  let right = height.length - 1;
   let result = 0;
 
   while (left < right){
-    const area = Math.min(heights[left], heights[r]) * (right - left); // height vs width
+    const area = Math.min(height[left], height[right]) * (right - left); // height vs width
     result = Math.max(result, area); // comparing previous result and potential new container with greater area
-    if (heights[left] <= heights[r]){ // until the pointers meet
-      l++; // increment the left to do the comparison
+    if (height[left] <= height[right]){ // until the pointers meet
+      left++; // increment the left to do the comparison
     } else{
-      r--; // otherwise increment the right
+      right--; // otherwise increment the right
     }
   }
 
