@@ -67,18 +67,57 @@ Columns need to be sorted in increasing order from top to bottom.
 
 We are using the information given to check if a number could possibly be in a row by looking at the the endpoints of a given row.
 
-Time complexity: O(m+n) where m is the number of rows and n is the number of columns
+Time complexity: O(m+n) where m is the number of rows and n is the number of columns.
+We can do better because in worse case we would need to iterate through all the rows and all the columns.
 */
 
 
 // Binary Search
 
 var searchMatrixBS = function (matrix, target) {
+  const ROWS = matrix.length;
+  const COLS = matrix[0].length;
   
+  let top = 0
+  let bottom = ROWS - 1;
+  while (top <= bottom){ // each loop narrows down the rows
+    const row = Math.floor((top + bottom) / 2); // calculate the middle row
+    if (target > matrix[row][COLS - 1]){ // we still do the same top right or bottom left check, in this case top right
+      top = row + 1; // remove a top row
+    } else if (target < matrix[row][0]){ // also need to check bottom
+      bottom = row - 1; // remove a botttom row
+    } else { // we do this until we're left in a remaining row
+        break; // we break out of the loop 
+    }
+  }
+
+  if (!(top <= bottom)){ 
+    return false;
+  }
+
+  const row = Math.floor((top+bottom) / 2); // start checking columns with binary search
+  let left = 0
+  let right = COLS - 1;
+  while (left <= right){
+    const middle = Math.floor((left + right) / 2);
+    if (target > matrix[row][middle]){
+      left = middle + 1;
+    } else if (target < matrix[row][middle]) {
+      right = middle - 1;
+    } else {
+        return true;
+    }
+  }
+  return false
 }
 
 
-/*
+/* Binary search still relies on previous assumption wrt sorting.
+
+We are basically running two binary searches, one to narrow down the rows. The next to narrow down the columns.
+Binary search works better than the staircase since we are discarding half the values in each loop.
+
+Hence time complexity O (log m + log n) where m is the row and n is the column.
 */
 
 // Binary Search - One Pass
