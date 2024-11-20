@@ -27,3 +27,45 @@ n == matrix[i].length
 -104 <= matrix[i][j], target <= 104
 
 */
+
+// 1. Brute Force - searching through every row, column by column
+
+var searchMatrixBF = function (matrix, target) {
+  for (let row = 0; row < matrix.length; row++){
+    for (let column = 0; column < matrix[row].length; column++){
+      if (matrix[row][column] === target) {
+        return true;
+      }
+    }
+  }
+  return false
+}
+
+// 2. Staircase Search - Problem dependent solution
+
+var searchMatrixStaircase = function (matrix, target) {
+  let row = 0;
+  let column = matrix[0].length - 1;
+
+  // staircase searches always start at either the top right or the bottom left, in this example its top right
+  while (row < matrix.length && column >= 0){
+    if (matrix[row][column] > target) { // if the top right is greater than the target, we know we are in the right row
+      column--;
+    } else if (matrix[row][column] < target){ // if not, we can go to the next row and try the search again
+      row++;
+    } else { //we perform both steps until its true or we break the loop
+      return true;
+    }
+  }
+  return false
+}
+
+/* This is reliant on the problem being set up for us. 
+
+Rows need to be sorted in increasing order from left to right.
+Columns need to be sorted in increasing order from top to bottom.
+
+We are using the information given to check if a number could possibly be in a row by looking at the the endpoints of a given row.
+
+Time complexity: O(m+n) where m is the number of rows and n is the number of columns
+*/
