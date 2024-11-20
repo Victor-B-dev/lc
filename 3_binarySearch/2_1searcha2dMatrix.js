@@ -86,12 +86,12 @@ var searchMatrixBS = function (matrix, target) {
       top = row + 1; // remove a top row
     } else if (target < matrix[row][0]){ // also need to check bottom
       bottom = row - 1; // remove a botttom row
-    } else { // we do this until we're left in a remaining row
+    } else { // we do this until we're left in a remaining row or we can't do any more operations
         break; // we break out of the loop 
     }
   }
 
-  if (!(top <= bottom)){ 
+  if (!(top <= bottom)){ // if none of the rows contain the target, its false
     return false;
   }
 
