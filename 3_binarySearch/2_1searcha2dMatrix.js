@@ -48,7 +48,7 @@ var searchMatrixStaircase = function (matrix, target) {
   let column = matrix[0].length - 1;
 
   // staircase searches always start at either the top right or the bottom left, in this example its top right
-  while (row < matrix.length && column >= 0){
+  while (row < matrix.length && column >= 0){ // matrix.length is the total number of rows
     if (matrix[row][column] > target) { // if the top right is greater than the target, we know we are in the right row
       column--;
     } else if (matrix[row][column] < target){ // if not, we can go to the next row and try the search again
@@ -68,4 +68,20 @@ Columns need to be sorted in increasing order from top to bottom.
 We are using the information given to check if a number could possibly be in a row by looking at the the endpoints of a given row.
 
 Time complexity: O(m+n) where m is the number of rows and n is the number of columns
+*/
+
+
+// Binary Search
+
+var searchMatrixBS = function (matrix, target) {
+  
+}
+
+
+/*
+*/
+
+// Binary Search - One Pass
+
+/*
 */
