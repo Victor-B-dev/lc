@@ -122,5 +122,30 @@ Hence time complexity O (log m + log n) where m is the row and n is the column.
 
 // Binary Search - One Pass
 
-/*
+var searchMatrixBSOnepass = function (matrix, target) {
+  let ROWS = matrix.length;
+  let COLS = matrix[0].length;
+
+  let left = 0;
+  let right = ROWS * COLS - 1;
+  while (left <= right){
+    let middle = left + Math.floor((right - left) / 2);
+    let row = Math.floor(middle / COLS);
+    let column = middle % COLS;
+    
+    if (target > matrix[row][column]){
+      left = middle + 1;
+    } else if (target < matrix[row][column]){
+      right = middle - 1;
+    } else {
+      return true;
+    }
+  }
+  return false;
+}
+
+/* Here because of the problem set up, the entire series of numbers is in non descending order.
+As such we could technically treat is as one giant array and as such do binary search on the whole thing in one pass.
+
+This is just an extra extra optimization.
 */
