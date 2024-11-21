@@ -46,4 +46,38 @@ var findMinBF = function(nums){
 
 /* Fairly straight forward for the BF solution to get a O(N) complexity.
 Only novel thing is using spread.
+
+How do we do binary search though if it isn't sorted the usual way?
 */
+
+/* The trick here is to look at the array and noticing there is pivot point (where it's not longer ascending order).
+We can thus infer that we have two sorted sub arrays where one array's values is always larger than the others.
+This is not unlike binary search now is it?
+
+Also note this only works in rotated arrays.
+*/
+
+// Binary Search
+
+var findMinBinarySearch = function (nums){
+  let left = 0;
+  let right = nums.length - 1;
+  let result = nums[0];
+
+  while (left <= right) {
+    if (nums[left] <= nums[right]){ // if the array is already sorted
+      result = Math.min(result, nums[left]); // early loop break to return
+      break;
+    }
+
+    let middle = Math.floor((left + right)/ 2); // got oteh middle
+    result = Math.min(result, nums[middle]);
+    if (nums[middle] >= nums[left]){ // if the middle is greater than the left, search the right
+      left = middle + 1; // by moving the left poitner to the right
+    } else {
+      right = middle - 1; // else vice versa
+    }
+  }
+
+  return result
+}
