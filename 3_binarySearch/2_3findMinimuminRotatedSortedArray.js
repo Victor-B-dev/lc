@@ -65,13 +65,14 @@ var findMinBinarySearch = function (nums){
   let result = nums[0];
 
   while (left <= right) {
-    if (nums[left] <= nums[right]){ // if the array is already sorted
+    if (nums[left] <= nums[right]){ // if the current sub array is sorted
       result = Math.min(result, nums[left]); // early loop break to return
       break;
     }
 
-    let middle = Math.floor((left + right)/ 2); // got oteh middle
+    let middle = Math.floor((left + right)/ 2); // go to the middle/fix the middle 
     result = Math.min(result, nums[middle]);
+
     if (nums[middle] >= nums[left]){ // if the middle is greater than the left, search the right
       left = middle + 1; // by moving the left poitner to the right
     } else {
