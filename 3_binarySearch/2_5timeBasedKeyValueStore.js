@@ -60,10 +60,12 @@ TimeMap.prototype.get = function (key, timestamp){
   while (left <= right){
     const mid = Math.floor ((left + right) / 2);
     if (values[mid][1] <= timestamp) {
-      result = values[mid][1]; // if the target is the timestamp (or the value before target) set the result to that timestamp
+      result = values[mid][0]; // set result to the the string value of the time stamp
       left = mid + 1; // we have this occur after because the while loop will try to run again to verify if it's the exact value or not
     } else{
-      right = mid + 1;
+      right = mid - 1;
     }
   }
+
+  return result
 }
