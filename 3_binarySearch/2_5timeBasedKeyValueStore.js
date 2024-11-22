@@ -39,5 +39,31 @@ This lets us know we can run a binary search on the time stamps.
 
 // Solution - Binary Search (Map)
 
+var TimeMap = function (){
+  this.map = new Map();
+}
 
+TimeMap.prototype.set = function (key, value, timestamp){
+  if (!this.map.has(key)){ // if the key doesn't exist
+    this.map.set(key, []); // set the key and an empty array as key value pair
+  }
 
+  this.map.get(key).push([value, timestamp]) // push the value/timestamp into the value for the key, need to do this way due to how it's stored
+}
+
+TimeMap.prototype.get = function (key, timestamp){
+  const values = this.map.get(key) || []; // the || is for the condition that if a key doesn't exist as dictated by the original problem
+  let left = 0
+  let right = values.length - 1;
+  let result = '';
+
+  while (left <= right){
+    const mid = Math.floor ((left + right) / 2);
+    if (values[mid][1] <= timestamp) {
+      result = values[mid][1]; // if the target is the timestamp (or the value before target) set the result to that timestamp
+      left = mid + 1; // we have this occur after because the while loop will try to run again to verify if it's the exact value or not
+    } else{
+      right = mid + 1;
+    }
+  }
+}
