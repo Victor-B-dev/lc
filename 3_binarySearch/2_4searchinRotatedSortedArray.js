@@ -27,3 +27,60 @@ nums is an ascending array that is possibly rotated.
 -104 <= target <= 104
 
 */
+
+// Brute Force
+
+var searchBF = function(nums, target){
+  for (let i=0; i < nums.length; i++){
+    if (nums[i] === target){
+      return i
+    }
+  }
+  return -1; // not found
+}
+
+/* O(n) solution honestly isn't bad but as per the question itself, this can be better, ergo binary search.
+
+Similar to finding the minimum, we can approach the problem as subarrays.
+*/
+
+// Binary Search
+
+var searchBinarySearch = function (nums, target){
+  let left = 0; 
+  let right = nums.length - 1;
+
+  while (left < right){ // find which sorted subarray which has the lower set of numbers
+    let middle = Math.floor((left + right) / 2)
+    if (nums[middle] > nums[right]){
+      left = middle + 1;
+    } else {
+      right = middle;
+    }
+  }
+
+  let pivot = left; // set the pivot so we know where the left/right are
+  left = 0;
+  right = nums.length - 1;
+
+  // compare the target against the pivot, which sorted subarray could the target be in
+  if (target >= nums[pivot] && target <= nums[r]){
+    left = pivot;
+  } else{
+    right = pivot - 1
+  }
+
+  // implement binary search
+  while (left <= right) {
+    let middle = Math.floor((left + right) / 2);
+    if (nums[m] === target){
+      return m;
+    } else if (nums[m] < target){
+      left = middle + 1;
+    } else{
+      right = middle - 1;
+    }
+  }
+
+  return -1 // if not found return -1
+}
