@@ -105,7 +105,7 @@ var searchBSOP = function (nums, target) {
         right = mid - 1;
         }
     } else {
-      if (target < nums[mid] || target > nums[r]) {
+      if (target < nums[mid] || target > nums[right]) {
         right = mid - 1;
       } else {
         left = mid + 1;
