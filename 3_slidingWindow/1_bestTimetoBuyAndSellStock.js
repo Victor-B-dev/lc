@@ -39,10 +39,29 @@ var maxProfit = function (prices) {
 
 /* Brute force is an inefficient O(n^2).
 Comparing every subsequent string is slow. 
-If we drew this out in a graph, we would know this is similiar to two pointers problenm, containers with max water.
+
+The trick with the problem is that we want the left pointer to be the lowest number possible and the right to be at the maximum (thus the profit).
+Therefore we only want to do a comparison when the left pointer is less than the right.
+
 */
 
+// Two Pointers
+var maxProfitTP = function (prices){
+  let left = 0;
+  let right = 1; // we must always buy first so right is needs to start 1 
+  let maxP = 0;
 
+  while (right < prices.length){ // right iterates through the rest of the array
+    if (prices[left] < prices[right]){  // only do profit check when left is less than right
+      let profit = prices [right] - prices[left]; // calculate profit
+      maxP = Math.max(maxP, profit); // compare profit against current max
+    } else {
+      left = right; // move the left pointer to the right's position since that's a new lowest # to check profit against
+    }
+    right++; // else move the right pointer along
+  }
+  return maxP;
+}
 
 /* There's quite few of these.
 */
