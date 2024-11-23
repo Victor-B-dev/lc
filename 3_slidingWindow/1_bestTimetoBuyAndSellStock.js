@@ -23,5 +23,26 @@ Constraints:
 0 <= prices[i] <= 104
 */
 
+// Brute Force
+var maxProfit = function (prices) {
+  let result = 0; // base case would be not worth buying
+  for (let i = 0; i < prices.length; i++){
+    let buy = prices[i];
+      for (let j = i + 1; j < prices.length; j++){
+        let sell = prices[j];
+        result= Math.max(result, sell - buy);
+      }
+  }
+
+  return result;
+}
+
+/* Brute force is an inefficient O(n^2).
+Comparing every subsequent string is slow. 
+If we drew this out in a graph, we would know this is similiar to two pointers problenm, containers with max water.
+*/
+
+
+
 /* There's quite few of these.
 */
