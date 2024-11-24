@@ -45,8 +45,8 @@ Therefore we only want to do a comparison when the left pointer is less than the
 
 */
 
-// Two Pointers
-var maxProfitTP = function (prices){
+// Two Pointers / Sliding Window Solution
+var maxProfitSlidingWindow = function (prices){
   let left = 0;
   let right = 1; // we must always buy first so right is needs to start 1 
   let maxP = 0;
