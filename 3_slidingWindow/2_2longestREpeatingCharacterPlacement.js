@@ -94,6 +94,9 @@ var characterReplacementSW = function (s, k){
 
 In the earlier example of ABABBA, this condition allows us to arrive at these two valid solutions of [ABABB-] & [-BABBA].
 
+
+Time Complexity is O(n) because we leverage the character counts all at once through max frequency.
+
 This may be a bit hard to understand at first since we are skipping over the solution variant of using the character counting directly.
 */
 
@@ -132,4 +135,6 @@ We only need to check for the valid characters in the string, hence a set.
 Everytime a given character count is updated, we check if it's a valid substring with regards to this specific letter. 
 
 The condition is the right pointer will keep going until it reaches a point where when it's updated and the number of replacements possible is exceeded (no longer valid window), we move the left pointer along since further right pointer iterations will not result in a valid substring count increase.
+
+Note the time complexity here is O(m * n) since we are checking the length of the strings against the total number of unique characters, hence it being slower than the max frequency solution.
 */
