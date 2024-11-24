@@ -68,4 +68,30 @@ var characterReplacementBF = function (s, k){
 
 // The brute force is O(n^2) because we're checking every single character for the parameters. Let's do sliding window
 
+// Sliding Window (Optimal)
 
+var characterReplacementSW = function (s, k){
+  let count = new Map();
+  let result = 0;
+
+  let left = 0; // we initialize the left outside a loop because we know we only need to move the left pointer across the condition in line 84
+  let maxFreq = 0;
+
+  for (let right = 0; right < s.length; right++){ // start with moving the right pointer
+    count.set(s[right], (count.get(s[right]) || 0) + 1); // add the character or +1 the count
+    maxFreq = Math.max(maxFreq, count.get(s[right])); // update max frequency if necessary
+    
+    while ((right - left + 1) - maxFreq > k){ // if the substring length minus the most frequent character is greater than k, i.e. it's a valid string
+      count.set(s[left], count.get(s[left] - 1)); // decrement the left character count
+      left++; // move the left pointer
+    }
+    result = Math.max(result, right - left + 1); // compare the result and the current substring; this result will only change when
+  }
+}
+
+/* The trick with the line 84 condition is looking at the problem and understanding logically when we would care about doing the comparison. As mentioned it's only when the most frequent character in a substring updates && the length being long enough, is when it's possible for our result to be influenced. When this occurs, we move the left pointer because we want to see if a different character's maximum count is possibly greater when accounting for the sliding window.
+
+In the earlier example of ABABBA, this condition allows us to arrive at these two valid solutions of [ABABB-] & [-BABBA].
+
+This may be a bit hard to understand at first since we are skipping over the solution variant of using the character counting directly.
+*/
