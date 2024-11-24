@@ -24,3 +24,24 @@ Constraints:
 s consists of only uppercase English letters.
 0 <= k <= s.length
 */
+
+/* Understanding the problem is essential so some additional information should be put into context.
+Only uppercase characters means we know at worse there may be 26 characters to check in a map. Storing the values in a map therefore should be expected.
+
+We know while checking a substring that a maximum length in a given substring will be from the left pointer at a character to the right pointer with the same character.
+ 
+We then need to check if the length inbetween is less than or equal to the given integer k, i.e. the number of times we can do a replacement.
+
+Substring length - count[letter] <= k
+
+Every time we move pointers, we need to increment/decrement the count.
+Importantly when we shift the left pointer, we need to decrement the character count which may be overlooked at first.
+
+While still looking at the problem, we can also infer that the whole operation (ie comparing the result with the current count) only needs to be done when the current count exceeds a previous maximum count of a letter.
+
+In other words, when calculating
+substring length - maximum frequency of a character <= k.
+If the current maximum frequency of character in the substring is less than a stored max, we should skip the rest of the loop and move to the next string because it will not influence the result.
+
+*/
+
