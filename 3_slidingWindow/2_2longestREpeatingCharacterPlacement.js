@@ -87,7 +87,7 @@ var characterReplacementSW = function (s, k){
     }
     result = Math.max(result, right - left + 1); // compare the result and the current substring; this result will only change when
   }
-  return result
+  return result;
 }
 
 /* The trick with the line 84 condition is looking at the problem and understanding logically when we would care about doing the comparison. As mentioned it's only when the most frequent character in a substring updates && the length being long enough, is when it's possible for our result to be influenced. When this occurs, we move the left pointer because we want to see if a different character's maximum count is possibly greater when accounting for the sliding window.
@@ -95,4 +95,41 @@ var characterReplacementSW = function (s, k){
 In the earlier example of ABABBA, this condition allows us to arrive at these two valid solutions of [ABABB-] & [-BABBA].
 
 This may be a bit hard to understand at first since we are skipping over the solution variant of using the character counting directly.
+*/
+
+// Sliding Window - Direct Character Counting - Explanation
+
+var characterReplacementSW2 = function (s, k) {
+  let result = 0;
+  let charSet = new Set(s); // could do this with a map, it's just nicer to not need to type the map syntax since this is a direct count
+
+  for (let char of charSet){ // for each character in the set
+    let count = 0;
+    let left = 0; // initialize left
+
+    for (let right = 0; right < s.length; right++){ // intialize right
+      if (s[right] === char){ // check if the right pointer is the character
+        count++; // update the count
+      }
+
+      while ((right - left - 1) - count > k){ // check if the substring minus the currently counted character is greater than k, i.e. does the current substring exceed the number of replacement possible
+        if (s[left] === char){ // check if the left is the same character
+          count--; // if it is, decrement the count
+        }
+        left++; // move the left pointer over regardless to start checking the next substring since further right pointer movement will not result in a valid substring
+      }
+
+      result = Math.max(result, right - left + 1); // check the substring length against the current max
+    }
+  }
+
+  return result;
+}
+
+/* This approach is based on using the character counts.
+We only need to check for the valid characters in the string, hence a set.
+
+Everytime a given character count is updated, we check if it's a valid substring with regards to this specific letter. 
+
+The condition is the right pointer will keep going until it reaches a point where when it's updated and the number of replacements possible is exceeded (no longer valid window), we move the left pointer along since further right pointer iterations will not result in a valid substring count increase.
 */
