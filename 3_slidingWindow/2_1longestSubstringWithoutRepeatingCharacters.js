@@ -25,7 +25,7 @@ var lengthOfLongestSubstringBF = function (s){
   let result = 0;
 
   for (let i = 0; i < s.length; i++){ // for each character in the string
-    let charSet = newSet(); // initialize a set;
+    let charSet = new Set(); // initialize a set;
     for (let j = i; j <s.length; j++){ // initialize a second pointer to iterate through the string
       if (charSet.has(s[j])){  // check if the current character exists in the set
         break; // break the current loop
@@ -35,4 +35,22 @@ var lengthOfLongestSubstringBF = function (s){
     result = Math.max(result, charSet.size); // compare the result and the current set's length/size, keep the larger one 
   }
   return result // return 
+}
+
+// Sliding Window 
+
+var lengthOfLongestSubstring = function (s){
+  const charSet = new Set();
+  let left = 0;
+  let result = 0;
+
+  for (let right = 0; right< s.length; right++) { // for each character at the right pointer
+    while (charSet.has(s[right])){ // check if the set has the current char
+      charSet.delete(s[left]); // attempt to delete it with the left pointer position ie check if the left pointer is at the same letter
+      left++; // move the left pointer up until it's not the same character as the right pointer
+    }
+    charSet.add(s[right]); // add the right pointer's character to the set
+    result = Math.max(result, right - left + 1); // compare the current max and the distance of the pointers
+  }
+  return result;
 }
