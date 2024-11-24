@@ -45,3 +45,27 @@ If the current maximum frequency of character in the substring is less than a st
 
 */
 
+// Brute Force
+
+var characterReplacementBF = function (s, k){
+  let result = 0;
+
+  for (let i = 0; i < s.length; i++){ // for each character, maintain a map to keep counts
+    let count = new Map();
+    let maxFreq = 0;
+
+    for (let j = i; j < s.length; j++){
+      count.set(s[j], (count.get(s[j]) || 0) + 1); // for each character, either add + 1 when it's encountered or add it to the map at value 1
+      maxFreq = Math.max (maxFreq, count.get(s[j])) // check if the current character count exceeds the previous max frequency & replace if necessary
+      if ((j - i + 1) - maxFreq <= k){ // if the substring length minus the max frequency is <= possible character replacements
+        result = Math.max(result, j - i + 1); // compare the current with the previous longest substring
+      }
+    }
+  }
+
+  return result
+}
+
+// The brute force is O(n^2) because we're checking every single character for the parameters. Let's do sliding window
+
+
