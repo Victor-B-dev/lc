@@ -82,11 +82,12 @@ var characterReplacementSW = function (s, k){
     maxFreq = Math.max(maxFreq, count.get(s[right])); // update max frequency if necessary
     
     while ((right - left + 1) - maxFreq > k){ // if the substring length minus the most frequent character is greater than k, i.e. it's a valid string
-      count.set(s[left], count.get(s[left] - 1)); // decrement the left character count
+      count.set(s[left], count.get(s[left]) - 1); // decrement the left character count
       left++; // move the left pointer
     }
     result = Math.max(result, right - left + 1); // compare the result and the current substring; this result will only change when
   }
+  return result
 }
 
 /* The trick with the line 84 condition is looking at the problem and understanding logically when we would care about doing the comparison. As mentioned it's only when the most frequent character in a substring updates && the length being long enough, is when it's possible for our result to be influenced. When this occurs, we move the left pointer because we want to see if a different character's maximum count is possibly greater when accounting for the sliding window.
