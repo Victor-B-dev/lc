@@ -43,7 +43,7 @@ var checkInclusion = function (s1, s2){
     let count2 = {}; // create a map for the character count
     let current = 0; // current is short for the count of current matching characters
 
-    for (let j = i; j <s2.length; j++){ // beginning at the start of the substring
+    for (let j = i; j < s2.length; j++){ // beginning at the start of the substring
       let char = s2[j];
       count2[char] = ((count2[char] || 0) + 1) // add the current character to the character count
 
@@ -68,7 +68,18 @@ A non valid substring can occur in a few ways.
 Adding a character that isn't part of substring 1 breaks it. 
 Adding too many to a character count also correctly breaks it. 
 (It being the current substring starting at a given letter)
+
+This is actually still too slow (TLE) for leetcode. There's unnecessary substring checks and it runs the current === need match repeatedly.
 */
 
+// Sliding Window - Matches 
 
+/* See group Anagrams question in arrayshashing (lc # 49) for array trick.
+
+Instead of comparing each index in each hashmap, as in the hashmap variant, we can instead evaluate a true false boolean on matches.
+Matches are updated as character counts are updated so we are dynamically keeping track as we iterate on first pass.
+This is slightly more optimal than the hashmap variant since we don't need to do the final comparisons at the end of indexing all the values.
+
+
+*/
 
