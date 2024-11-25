@@ -29,7 +29,7 @@ Therefore we're looking for an anagram of s1 inside a substring of s2.
 We can do a sliding window of the letter count of substrings until there's an exact match of letter counts.
 */
 
-// Hashmap variant
+// Hashmap variant- Too Slow BTW
 
 var checkInclusion = function (s1, s2){
   let count1 = {};
@@ -74,12 +74,63 @@ This is actually still too slow (TLE) for leetcode. There's unnecessary substrin
 
 // Sliding Window - Matches 
 
+var checkInclusionSW = function (s1, s2) {
+  if (s1.length > s2.length){
+    return false;
+  }
+
+  let s1Count = new Array(26).fill(0); // initialize an array for both word counts, 26 spots for 26 lower case letters
+  let s2Count = new Array(26).fill(0);
+
+  for (let i = 0; i < s1.length; i++){ // fill up each word count with string one's length since that's the minimum length substring
+    s1Count[s1.charCodeAt(i) - 97]++;
+    s2Count[s2.charCodeAt(i) - 97]++;
+  }
+
+  let matches = 0;
+  for (let i = 0; i < 26; i++){ // we check the initialized word counts for the current number of matches at initialization
+    if (s1Count[i] === s2Count[i]){
+      matches++;
+    }
+  }
+
+  let left = 0;
+  for (let right = s1.length; right < s2.length; right++){ // starting position is at minimum substring length (s1)
+    if (matches === 26){ // if there are 26 matches, that means there's a valid substring
+      return true;
+    }
+
+    let index = s2.charCodeAt(right)  - 97; // we start at the right pointer translating the character into an index on the array
+    s2Count[index]++; // move the right pointer over 1 and process the new character
+    if (s1Count[index] === s2Count[index]){  // if the word count at the index matches
+      matches++; // increment the matches
+    } else if (s1Count[index] + 1 === s2Count[index]){  // if the word count at the index is one more than the correct word count; note it is written comparing s1 to s2
+      matches--; // decrement the matches
+    }
+
+    index = s2.charCodeAt(left) - 97;  // now select the left pointer
+    s2Count[index]--; // remove a count at this index since the left pointer is going to move over one
+    if (s1Count[index] === s2Count[index]){ // check if this removal causes a match ++
+      matches++; 
+    } else if (s1Count[index] - 1 === s2Count[index]){ // only decerement if it causes a match to unmatch (change of 1 at an index)
+      matches--;
+    }
+    left++; // move the left pointer over one
+  }
+
+  return matches === 26;
+}
+
 /* See group Anagrams question in arrayshashing (lc # 49) for array trick.
 
 Instead of comparing each index in each hashmap, as in the hashmap variant, we can instead evaluate a true false boolean on matches.
 Matches are updated as character counts are updated so we are dynamically keeping track as we iterate on first pass.
 This is slightly more optimal than the hashmap variant since we don't need to do the final comparisons at the end of indexing all the values.
 
+Line 107 accounts for the fact when we add a character not in the s1 string to s2's word count, we need to decrement the matches (adding a character that isn't a match)
 
+Line 111-118 may seem a bit confusing with removing a count before moving the pointer but it's due to the way the left pointer is set up.
+
+You can also write the left pointer as a value in respect to the right pointer (being s1.length behind it)
 */
 
