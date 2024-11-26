@@ -24,3 +24,9 @@ Output: [1,5,2,4,3]
 Constraints:
 The number of nodes in the list is in the range [1, 5 * 104].
 1 <= Node.val <= 1000 */
+
+/* The question is asking us to reorder the list such that after the head:
+:it reorders (formerly) last element, second element, second to last element, etc. 
+
+We need two pointers/temp values to keep track of our placements as we iterate through the list.
+We also need to be wary of when the two pointers intersect such that we don't have an infinite cycle nor leave out any elements.*/
