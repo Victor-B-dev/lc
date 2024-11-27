@@ -39,3 +39,32 @@ If we just follow the next paths, we will not incorporate the random paths.
 If we try to incorporate the random paths in the first pass, we will encounter errors if the random pointer points to a node that hasn't been generated yet.
 
 Therefore we need to store both the next & random pointers first. Let's use a hashmap.*/
+
+// Hashmap
+
+var copyRandomListTwoPass = function (head){
+  const oldCopy = new Map(); // create hashmap
+  oldCopy.set(null, null);
+
+  let current = head;
+  while (current){
+    const copy = new Node(current.value); // create a copy of the old node
+    oldCopy.set(current, copy); // set the value of the key to be the old list's nodes
+    current = current.next; // move to next node
+  }
+
+  current = head;
+  while (current){ // 
+    const copy = oldCopy.get(current); // iterate through the copy's nodes
+    copy.next = oldCopy.get(current.next); // set the next pointers from the hashmap
+    copy.random = oldCopy.get(current.random); // set the random pointers from the hashmap
+    current = current.next;
+  }
+
+  return oldCopy.get(head);
+}
+
+/*  First Pass - First make all nodes without copying any of the pointers.
+Store all the nodes in a hashmap.
+
+Second pass - Retrieve them to implement all the pointers. */
