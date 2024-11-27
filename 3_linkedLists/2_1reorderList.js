@@ -34,6 +34,26 @@ We also need to be wary of when the two pointers intersect such that we don't ha
 
 // Brute Force
 
+var functionBF = function (head) {
+  const nodes = []; // move all the nodes into an array because we can just use two pointers
+  let current = head;
+  while (current){
+    nodes.push(current);
+    current = current.next;
+  }
+
+  let i = 0;
+  let j= nodes.length -1;
+  while (i < j){
+    nodes[i].next = nodes[j]; // traverse from the start to the end
+    i++; // increment
+    if (i >=j) break; // have break condition when they meet in the middle, this is for the case of odd # lists
+    nodes[j].next = nodes[i]; // traverse break
+    j--;
+  }
+  nodes[i].next = null; // add a null to the list end
+}
+
 // Reverse and Merge (Optimal - no extra space needed)
 var reorderListRM = function (head) {
   // we use the slow fast pointer algorithm (reverse linked list problem) to find the middle of the linked list
