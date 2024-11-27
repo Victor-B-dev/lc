@@ -42,3 +42,33 @@ var removeNthFromEnd = function(head, n){
   return head;
 }
 
+// Iteration (Two Pass)
+
+var removeNthFromEndTwoPass = function (head, n){
+  // similar to brute force, no matter what, we need to traverse to the end of the list, we are just doing in place to not need extra space
+  let N = 0;
+  let current = head;
+  while (current) {
+    N++;
+    current = current.next;
+  }
+
+  const removeIndex = N - n; // create a pointer to the index being removed
+  if (removeIndex === 0){
+    return head.next;
+  }
+
+  current = head;
+  for (let i = 0; i < N - 1; i++){
+    if (i + 1 === removeIndex) { // when we reach the index that will point to the index to be removed
+      current.next = current.next.next; // we change its pointer to go to the element after the removeIndex
+      break; // then break the loop
+    }
+    current = current.next; // otherwise we continue traversing the list
+  }
+  return head;
+}
+
+// Two Pass is simple in concept with just understanding how lists operate and the syntax to do what you want it to do.
+
+// Two Pointer (One Pass)
