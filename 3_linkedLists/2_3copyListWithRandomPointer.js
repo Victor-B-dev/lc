@@ -48,7 +48,7 @@ var copyRandomListTwoPass = function (head){
 
   let current = head;
   while (current){
-    const copy = new Node(current.value); // create a copy of the old node
+    const copy = new Node(current.val);
     oldCopy.set(current, copy); // set the value of the key to be the old list's nodes
     current = current.next; // move to next node
   }
