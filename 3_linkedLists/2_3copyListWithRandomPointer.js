@@ -68,3 +68,37 @@ var copyRandomListTwoPass = function (head){
 Store all the nodes in a hashmap.
 
 Second pass - Retrieve them to implement all the pointers. */
+
+// Space Optimized - just lists and two pointers
+var copyRandomList = function(head) {
+  if (head === null) {
+      return null;
+  }
+
+  let l1 = head; // first pass
+  while (l1) { 
+      let l2 = new Node(l1.val);
+      l2.next = l1.random; // we place the new nodes as the intermediaries between the random pointers
+      l1.random = l2; // as such we get a structure of original node/ new node
+      l1 = l1.next; // with the original next pointers in tack
+  }
+
+  let newHead = head.random;
+
+  l1 = head;
+  while (l1) { // in the second pass
+      let l2 = l1.random; 
+      l2.random = l2.next ? l2.next.random : null; // we start assigning the new list's random node to the correct l1 node - see line 81
+      l1 = l1.next;
+  }
+
+  l1 = head;
+  while (l1) { // in the third pass, split the nodes from the original list and the copied list
+      let l2 = l1.random; 
+      l1.random = l2.next; // restore l1 random to its original destination - line 82
+      l2.next = l1.next ? l1.next.random : null; // set l2 next to its correct next node
+      l1 = l1.next;
+  }
+
+  return newHead;
+}
