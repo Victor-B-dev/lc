@@ -1,4 +1,4 @@
-def isAnagramSort(s, t) -> bool:
+def isAnagramSort(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
     
