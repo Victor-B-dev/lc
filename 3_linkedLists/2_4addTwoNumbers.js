@@ -30,3 +30,27 @@ We need to implement carry (hint provided by Leetcode) which are basically 0 pla
 
 E.g. if we are adding 342 + 465 = 807.
 The 3 and 4 digits are in actuality 300 + 400 = 700, with the 800 being the a result of 40 + 60.*/
+
+// Iterative
+
+var addTwoNumbers = function(l1, l2) {
+  const dummy = new ListNode();
+  let current = dummy;
+
+  let carry = 0;
+  while (l1 || l2 || carry) {
+    const v1 = l1 ? l1.val : 0;
+    const v2 = l2 ? l2.val : 0;
+
+    let val = v1 + v2 + carry;
+    carry = Math.floor(val / 10);
+    val = val % 10;
+    current.next = new ListNode(val);
+
+    current = current.next;
+    v1 = l1 ? l1.next : null;
+    v2 = l2 ? l2.next : null;
+  }
+
+  return dummy.next;
+}
