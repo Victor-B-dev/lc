@@ -12,3 +12,11 @@ def hasDuplicateSorting(nums) -> bool:
             return True
     return False
 
+def hasDuplicateHS(nums) -> bool:
+    hashset = set()
+    for num in nums:
+        if num in hashset:
+            return True
+        hashset.add(num)
+    return False
+
