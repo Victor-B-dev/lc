@@ -1,12 +1,12 @@
 class SolutionSort:
-    def isAnagram(s: str, t: str) -> bool:
+    def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
         return sorted(s) == sorted(t)
 
 
 class SolutionHashTable:
-    def isAnagramHT(s: str, t:str) -> bool:
+    def isAnagramHT(self, s: str, t:str) -> bool:
         if len(s) != len(t):
             return False
     

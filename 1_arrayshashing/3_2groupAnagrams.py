@@ -1,5 +1,8 @@
 from collections import defaultdict
-def groupAnagramSort(strs):
+from typing import List
+
+class SolutionSort:
+    def groupAnagramSort(strs):
     res = defaultdict(list) 
     
     for word in strs:
