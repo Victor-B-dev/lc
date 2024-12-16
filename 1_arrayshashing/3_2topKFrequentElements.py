@@ -1,3 +1,5 @@
+from typing import List
+
 class SolutionSort:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = {};
@@ -11,6 +13,10 @@ class SolutionSort:
             array.sort()
 
         result = []
-        while len(res) < k:
+        while len(result) < k:
             result.append(array.pop()[1])
         return result
+    
+
+class SolutionBucketSortHashmap:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
