@@ -381,3 +381,21 @@ for value in my_dict.values():
 values = list(my_dict.values()) # useful converting values into a list that can be worked on
 # imagine trying to find the lowest age in a dictionary of people w/ their age
 lowestAge = print(min(list(my_dict.values())))
+
+
+#Inputs - always strings
+def read_and_print_input() -> None:
+    line = input("Reading a single line of text")
+    print(line)
+
+# type conversion for inputs
+age = int(input("Enter your Age: ")) # if the user tries to input an improper type, you will get an error
+def read_integer() -> int:
+    integer = int(input())
+    return integer
+
+# Parsing Input
+number_string = "1,2,3"
+string_list = number_string.split(",") # making the delimiter ,
+print(string_list) # output ["1","2","3"]
+
