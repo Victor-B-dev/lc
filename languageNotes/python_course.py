@@ -223,3 +223,12 @@ def remove_fourth_character(word: str) -> str: # type: ignore
     before_word = word[0:3]
     after_word = word[4:]
     return before_word + after_word
+
+#Format Method
+name = "John"
+age = 30
+
+msg = "Hello, {}, You are {}.".format(name, age) # {} are the placeholder, fills in the spot in the order
+
+#f-strings AKA template literlas
+msg = f"Hello, {name}, You are {age}." #the syntax starts with an f
