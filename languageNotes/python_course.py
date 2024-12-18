@@ -399,3 +399,13 @@ number_string = "1,2,3"
 string_list = number_string.split(",") # making the delimiter ,
 print(string_list) # output ["1","2","3"]
 
+# Try Except (Error handling/Exception Handling)
+try:
+    result = 10 / 0
+except:
+    print("Can\'t divided by zero")
+
+try:
+    result = 10/0
+except Exception as error:
+    print("Error:", error) #taking the error message and printing, common 
