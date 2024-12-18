@@ -217,3 +217,9 @@ print(my_string[::-1]) # reversing the string in total
 print(my_string[0:2:-1]) # reverse the string from 1 to 0, since not including 2, so we would get "eh"
 
 # strings are immutable hence the above behavior with slicing
+# This will give us a TypeError if we try to reassign a character in a string e.g. my_string[0] = "X" 
+
+def remove_fourth_character(word: str) -> str: # type: ignore
+    before_word = word[0:3]
+    after_word = word[4:]
+    return before_word + after_word
