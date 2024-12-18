@@ -39,7 +39,7 @@ name = "John"
 my_list = [1,2,3] # list/array
 
 #Dynamic Typing
-int variable = 10 # static typed languages require a variable to be declared with a type and are immutable
+variable = 10 # static typed languages require a variable to be declared with a type and are immutable
 variable = "haha" 
 
 # Type Casting - changing a type explicitly like string to integer or float to integer
@@ -149,7 +149,7 @@ x <= y
 # If statements - Important, variables declared in IF statements are not locally scoped, can be accessed after
 # Else if - elif
 account_balance = 100
-def is_balance_low(balance:int) -> None:
+def is_balance_low(account_balance: int) -> None:
     if (account_balance < 100):
         print("Your account balance is too low.")
     elif (account_balance == 0):
@@ -260,7 +260,7 @@ else:
 def check_element(a_list, element) -> bool:
     return element in a_list # we don't have to write out the if else, just the statement that will be evaluated
 
-from typing import List #need this typing  conversely could do from typing import * for everything (List, Dict, Tuple, Any, Union, etc)
+from typing import * #need this typing  conversely could do from typing import * for everything (List, Dict, Tuple, Any, Union, etc)
 
 # List looping example
 def count_x(nums: List[int], x: int) -> int:
@@ -337,6 +337,47 @@ my_list = [1,2,3,4,5]
 my_set = set(my_list) # convert a list into a set - this will remove dupes
 len(my_set) # you can call length on sets to know the number of elements in it
 
-def contains_dupe(words: List[str]) -> Bool:
+def contains_dupe(words: List[str]) -> bool:
     my_set = set(words)
     return len(my_set) < len(words)
+
+# Dictionaries AKA Hashmaps
+# key:value pair separated by ,
+my_dict = {"John": 10, "Jerry": 25, "Kerry": 30}
+empty_dict = {}
+
+my_dict["Bob"] = 70 # insert by indexing with key and setting it to the value
+
+def create_dict(name: str, age: int) -> dict[str, int]: #dict for 3.9 and later python version, Dict for earlier
+    new_dict = {name: age}
+    return new_dict
+
+# they also cannot have duplicate keys
+# you can reassign values to keys
+my_dict["Bob"] = 35 
+
+# the values can be anything
+my_dict = {"a":1, "b":1, "c": (1,2,3,4)}
+print(my_dict["a"]) #1
+print("d" in my_dict) # False - not in there
+
+# looping through a dictionary
+for key in my_dict:
+    value = my_dict[key]
+    print(key, value)
+
+# concise way - using .items()
+for key, value in my_dict.items():
+    print(key, value)
+
+# removing an item from a dictionary - if the key doens't exist it will throw an error!
+remove_item = my_dict.pop("a", 0) # try to remove key, if it doesn't exist, return 0 - also in this case i'm storing the removed value
+del my_dict["a"] # using del keyword
+
+# values
+for value in my_dict.values():
+    print(value)
+
+values = list(my_dict.values()) # useful converting values into a list that can be worked on
+# imagine trying to find the lowest age in a dictionary of people w/ their age
+lowestAge = print(min(list(my_dict.values())))
