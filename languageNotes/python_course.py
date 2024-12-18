@@ -319,3 +319,24 @@ print(my_tuple[1:]) #(5,6) - remember slicing doesn't modify original
 
 #common for related data that won't be modified
 #can call sum, min, max
+
+
+# Sets - are NOT ordered, can only contain unique elements
+my_set = {1, 2, 3} #curly braces
+empty_set = set() #built in method - note its a method call, and that it's using ()
+
+# Set Operations
+my_set.add(1) # method is add() - not append - won't actually add since it exists already
+my_set.remove(1) 
+my_set.remove(4) # will give KeyError
+
+for element in my_set:
+    print(element) # remember unordered - repeat calls will give diff output
+
+my_list = [1,2,3,4,5]
+my_set = set(my_list) # convert a list into a set - this will remove dupes
+len(my_set) # you can call length on sets to know the number of elements in it
+
+def contains_dupe(words: List[str]) -> Bool:
+    my_set = set(words)
+    return len(my_set) < len(words)
