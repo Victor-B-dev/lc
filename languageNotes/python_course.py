@@ -304,3 +304,12 @@ def find_index(nums: List[int], target: int) -> int:
         n = nums[i]
         if n == target:
             return i
+
+# negative indexes - VALID - going backwards from the end of the list 
+print(my_list[-3]) # 4
+print(my_list(len(my_list) - 3)) # length of the list - 3 would be the same thing, e.g the JS way of doing it, Python allows this more concise & common way of doing it
+
+def get_last_elements(genericList: List[int], target: int) -> List[int]:
+    return genericList[target:]
+
+
