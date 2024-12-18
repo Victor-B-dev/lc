@@ -232,3 +232,75 @@ msg = "Hello, {}, You are {}.".format(name, age) # {} are the placeholder, fills
 
 #f-strings AKA template literlas
 msg = f"Hello, {name}, You are {age}." #the syntax starts with an f
+
+
+# Lists AKA Arrays
+my_list = [1,2,3]
+
+if len(my_list) > 0:
+    print("List not empty")
+else:
+    print("The list is not empty")
+
+if my_list: # boolean context - does this exist? Similar to JS
+    print("List not empty")
+else:
+    print("The list is not empty")
+
+if 1 in my_list: # "in" operator check if something is in the array, includes() in JS
+    print("1 is in the list.")
+else:
+    print("1 is not in the list.")
+
+if 4 not in my_list: # not in  
+    print("4 is in the list.")
+else:
+    print("4 is not in the list.") 
+
+def check_element(a_list, element) -> bool:
+    return element in a_list # we don't have to write out the if else, just the statement that will be evaluated
+
+from typing import List #need this typing  conversely could do from typing import * for everything (List, Dict, Tuple, Any, Union, etc)
+
+# List looping example
+def count_x(nums: List[int], x: int) -> int:
+    count = 0
+    for n in nums:
+        if n == x:
+            count += 1
+    return count
+
+# Common List functions - mutable
+my_list = [1,2,3,4,5,6]
+print(sum(my_list)) # add them all
+print(min(my_list)) # lowest value in the list
+print(max(my_list)) # highest value in the list
+
+my_list.append(7) # append modifies the original list
+print(my_list) #1,2,3,4,5,6,7
+
+def add_elements(genericList: List[int], elements: List[int]) -> List[int]:
+    for n in elements:
+        genericList.append(n)
+    return genericList
+
+# .pop() by default will remove last element in the list, you can also pass in an index
+my_list.pop() # 1, 2, 3, 4, 5, 6
+my_list.pop(0) # 2, 3, 4, 5, 6
+my_list.pop(3) # 2, 3, 4, 6
+
+def pop_n_from_list(genericList: List[int], n: int) -> List[int]:
+    while n > 0:
+        genericList.pop()
+        n -= 1
+    return genericList
+
+# List Find - getting the index at which an element is found
+my_list = [1,2,3,4,5,3]
+print(my_list.index(3)) # will return 2 - it returns the FIRST occurence
+
+def find_index(nums: List[int], target: int) -> int:
+    for i in range(len(nums)):
+        n = nums[i]
+        if n == target:
+            return i
