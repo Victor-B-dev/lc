@@ -313,3 +313,9 @@ def get_last_elements(genericList: List[int], target: int) -> List[int]:
     return genericList[target:]
 
 
+# Tuples - immutable
+my_tuple = (4,5,6) # made with parantheses instead of brackets
+print(my_tuple[1:]) #(5,6) - remember slicing doesn't modify original
+
+#common for related data that won't be modified
+#can call sum, min, max
