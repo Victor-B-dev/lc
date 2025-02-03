@@ -35,3 +35,26 @@ The strictly decreasing subarrays of nums are [3], [2], [1], [3,2], [2,1], and [
 Hence, we return 3.
 */
 
+// One Pass Solution
+
+var longestMonotonicSubarray = function(nums) {
+  let maxLength = 1;
+  let incLength = 1;
+  let decLength = 1;
+
+  for (let i = 1; i < nums.length; i++){
+    if (nums[i - 1] < nums[i] ){
+      incLength++;
+      decLength = 1;
+    } else if (nums[i - 1] > nums[i]){
+      incLength = 1;
+      decLength++;
+    } else {
+      incLength = 1;
+      decLength = 1;
+    }
+    maxLength = Math.max(maxLength,incLength, decLength)
+  }
+  
+  return maxLength
+}
