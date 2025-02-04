@@ -20,5 +20,28 @@ Input: nums = [12,17,15,13,10,11,12]
 Output: 33
 Explanation: [10,11,12] is the ascending subarray with the maximum sum of 33.
 
+*/
+
+var maxAscendingSum = function(nums) {
+    let max = nums[0]
+    let currentSum = nums[0]
+
+    for (let i = 1; i < nums.length; i++){
+      if (nums[i] <= nums[i - 1]){
+        max = Math.max(max,currentSum);
+        currentSum = nums[i];
+      } else {
+        currentSum += nums[i]
+      }
+    }
+
+    max = Math.max(max, currentSum)
+    return max
+};
+
+
+/* Starting at first index instead of 0 to allow for nums[i - 1]
+Initialize both max and current sum with zero index instead ().
+Only missed needing <= to handle duplicate numbers in [nums].
 
 */
