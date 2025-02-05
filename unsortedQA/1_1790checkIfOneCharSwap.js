@@ -21,3 +21,25 @@ Output: true
 Explanation: The two strings are already equal, so no string swap operation is required.
 */
 
+var areAlmostEqual = function(s1, s2) {
+  let indexes = [];
+
+  for (let i = 0; i < s1.length; i++){
+      if (s1[i] !== s2[i]){
+          indexes.push(i)
+      } 
+
+      if (indexes.length > 2){
+          return false
+      }
+  }
+
+  if (indexes.length === 2){
+      let i = indexes[0];
+      let j = indexes[1];
+
+      return (s1[i] === s2[j] && s1[j] === s2[i]) 
+  }
+
+  return indexes.length === 0
+};
