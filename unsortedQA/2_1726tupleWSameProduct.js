@@ -22,3 +22,9 @@ Explanation: There are 16 valid tuples:
 (4,5,2,10) , (4,5,10,2) , (5,4,2,10) , (5,4,10,2)
 
 */
+
+/* Brute forcing is a poor choice even from an an early implementation standard so going to skip that.
+Using the example as a basis, we can infer that a valid set of numbers allows 8 valid tuples.
+
+The question now is find products with 2 or more valid pairs.
+*/
