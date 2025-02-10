@@ -21,3 +21,20 @@ Explanation:
 First, we apply the operation on s[2], and s becomes "c4".
 Then we apply the operation on s[1], and s becomes "".
 */
+
+
+// stack - O(n) time & space solution
+
+var clearDigits = function(s) {
+  let stack = [];
+
+  for (let char of s){
+      if (!isNaN(char)){ // clever way to check if the character is a number
+          if (stack.length) stack.pop(); // if it's number, pop off the stack
+      } else{
+          stack.push(char); // otherwise push it onto the stack
+      }
+  }
+
+  return stack.join("");
+};
