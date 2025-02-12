@@ -39,25 +39,25 @@ The stack solution addresses this but pointing out where the logic can be adjust
 // stack solution
 
 var removeOccurrences = function(s, part) {
-    let stack = []; // stack is the result
-    let targetLength = part.length
-    let finalChar = part[part.length - 1]; 
+  let stack = []; // stack is the result
+  let targetLength = part.length
+  let finalChar = part[part.length - 1]; 
 
-    for (let currentChar of s){
-      stack.push(currentChar);
+  for (let currentChar of s){
+    stack.push(currentChar);
 
-      if (currentChar === finalChar && stack.length >= targetLength){
-        if (stack.slice(-targetLength).join('') === part){
-          stack.length -= targetLength;
-        }
+    if (currentChar === finalChar && stack.length >= targetLength){
+      if (stack.slice(-targetLength).join('') === part){
+        stack.length -= targetLength;
       }
     }
-    return stack.join('');
+  }
+
+  return stack.join('');
 };
 
 /* the logic in 39 is real thing that needs to be explained.
 
-Whenever the final letter of the substring "part" is encountered (finalChar), we check if the current stack is sufficiently long. Only then do we do the expensive comparison operation-- we check if the substring (shallow copy via slice/join) is equal to "part". If it is, we remove the characters from the stack.
+Whenever the final letter of the substring "part" is encountered (finalChar), we check if the current stack is sufficiently long. Only then do we do the expensive comparison operation-- we check if the substring (shallow copy via slice/join) is equal to "part". If it is, we remove the characters from the stack.*/
 
-
-*/
+// Super Optimized Solution - Knuth-Morris-Pratt (KMP) Algorithm
