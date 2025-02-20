@@ -25,3 +25,28 @@ Explanation:
 n = 9 since there are 9 numbers, so all numbers are in the range [0,9].
  8 is the missing number in the range since it does not appear in nums.
 */
+
+
+
+// optimal
+var missingNumber = function(nums) {
+  let result = nums.length;
+
+  for (let i =0; i <nums.length; i++){
+      res += i - nums[i];
+  }
+
+  return result
+};
+
+/* The trick with the solution is realizing what information we have & what we are looking for.
+In the range given, because we are only looking for 1 number missing & what we are given is a "complete set", we know the difference between the total sum & the sum of the current set is the missing number.
+
+The logic is similar to two sum.
+
+Another way to look at it is that we are given two contiguous sets of numbers i & nums[i].
+We don't care about the order that nums[i] comes in, they will always be exist in set i.
+
+Hence we set result to nums.length because it is the missing value from the nums[i] set.
+If you follow the logic from res+= i - nums[i], you'll be left with a remaining value.
+*/
