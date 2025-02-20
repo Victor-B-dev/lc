@@ -19,3 +19,23 @@ n == nums.length
 
 Follow up: Could you do it without extra space and in O(n) runtime? 
 You may assume the returned list does not count as extra space.*/
+
+
+// The easy solution with extra space is to convert this into a hash set & then iterate through the set to remove values
+
+var findDisappearedNumbers = function(nums) {
+  let hashset = new Set(nums);
+  let result = [];
+
+  for (let i = 1; i <= nums.length; i++){
+    if (!hashset.has(i)){
+      result.push(i)
+    }
+  }
+
+  return result
+};
+
+/* Two little tricks here.
+First is that we are told to initialize at 1; so for the loop we need i <= nums.length.
+Second is what we are comparing against the hashset is the index counter that's why line 31-32 has only "i".*/
