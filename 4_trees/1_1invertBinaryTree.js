@@ -23,10 +23,23 @@ var invertTree = function(root) {
   while (stack.length > 0) {
     let node = stack.shift();
 
-    [node.left, node.right] = [node.right, node.left]; // destructure swp
+    [node.left, node.right] = [node.right, node.left]; // destructure swap
     if (node.left != null) stack.push(node.left); // stack left node if it has children
     if (node.right != null) stack.push(node.right); // also stack
   }
+
+  return root;
+};
+
+// DFS solution - recursive call
+
+var invertTreeDFS = function(root) {
+  if (root === null) return null;
+
+  [root.left, root.right] = [root.right, root.left];
+
+  invertTree(root.left);
+  invertTree(root.right);
 
   return root;
 };
