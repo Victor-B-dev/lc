@@ -1,0 +1,32 @@
+/* 226. Invert Binary Tree
+
+Given the root of a binary tree, invert the tree, and return its root.
+
+Example 1:
+Input: root = [1,2,3,4,5,6,7]
+Output: [1,3,2,7,6,5,4]
+
+Example 2:
+Input: root = [3,2,1]
+Output: [3,1,2]
+
+Better to go to leetcode proper to see the image but it's basically being mirrored horizontally.
+*/
+
+// BFS Solution - stack solution
+
+var invertTree = function(root) {
+  if (root == null) return null; // base case
+  
+  const stack = [root];
+
+  while (stack.length > 0) {
+    let node = stack.shift();
+
+    [node.left, node.right] = [node.right, node.left]; // destructure swp
+    if (node.left != null) stack.push(node.left); // stack left node if it has children
+    if (node.right != null) stack.push(node.right); // also stack
+  }
+
+  return root;
+};
