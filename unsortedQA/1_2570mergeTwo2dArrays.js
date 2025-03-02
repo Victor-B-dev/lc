@@ -39,22 +39,22 @@ var mergeArrays = function(nums1, nums2) {
   let result = [];
 
   while (i < nums1.length || j < nums2.length){
-      if (i < nums1.length && j < nums2.length) {
+      if (i < nums1.length && j < nums2.length){ // while there are values in both arrays, do comparisons
           if (nums1[i][0] < nums2[j][0]){
               result.push(nums1[i]);
               i++;
           } else if (nums1[i][0] > nums2[j][0]){
               result.push(nums2[j]);
               j++;
-          } else {
+          } else { // the else is for if they're equal, i originally had it be checked first but that's usually unnecessary
               result.push([nums1[i][0], (nums1[i][1] + nums2[j][1])])
               i++;
               j++;
           }
-      } else if (i < nums1.length){
+      } else if (i < nums1.length){ // if nums2 runs out first, need to push the remaining numbers of nums1
           result.push(nums1[i]);
           i++;
-      } else {
+      } else { // vice versa
           result.push(nums2[j]);
           j++;
       }
