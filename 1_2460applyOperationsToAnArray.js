@@ -64,3 +64,29 @@ var applyOperations = function(nums) {
   return nums
 };
 
+// swap solution - in place - could do fully one pass but the question is phrased to purposefully do two
+
+var applyOperations2 = function (nums) {
+  
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      nums[i] = nums[i] * 2;
+      nums[i + 1] = 0;
+    }
+  } 
+
+  let nonZeroIndex = 0;
+  for (let i = 0 ; i < nums.length; i++){
+    if (nums[i] !== 0){ // when the index encounters a nonzero int
+
+      if (nonZeroIndex !== i){ // make sure left point & the index are not the same
+        nums[nonZeroIndex] = nums[i]; // if they aren't, set the nonZero value to the current index value
+        nums[i] = 0; // set index value to zero
+      }
+
+      nonZeroIndex++; // iterate nonZeroIndex regardless
+    }
+  }
+
+  return nums;
+};
