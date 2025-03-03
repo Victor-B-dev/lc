@@ -24,3 +24,27 @@ Explanation:
 The element -3 is less than the pivot so it is on the left side of the array.
 The elements 4 and 3 are greater than the pivot so they are on the right side of the array.
 The relative ordering of the elements less than and greater than pivot is also maintained. [-3] and [4, 3] are the respective orderings.*/
+
+
+/* We are going to have three components to the answer, before the pivot & after the pivot. Then just add them all together*/
+
+var pivotArray = function(nums, pivot) {
+  let less = [];
+  let p = [];
+  let greater = [];
+
+  for (let n of nums){ // i originally wrote let "let n in nums" which is wrong, need of for values
+    if(n < pivot){
+      less.push(n);
+    } else if (n > pivot){
+      greater.push(n);
+    } else
+      p.push(n);
+  }
+
+  return less.concat(p.concat(greater))
+  // this return could alternatively done with spreading return [...less, ...p, ...greater]
+};
+
+// there is a quicksort solution however it would not be appropriate because it asks to preserve order, qs is not stable
+
