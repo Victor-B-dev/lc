@@ -39,3 +39,28 @@ Constraints:
 2 <= nums.length <= 2000
 0 <= nums[i] <= 1000*/
 
+var applyOperations = function(nums) {
+  for (let i = 0; i < nums.length; i ++){
+    if (nums[i] == nums[i + 1]){
+      nums[i] *= 2;
+      nums[i + 1] = 0;
+    }
+  }
+
+  // move all the non zeros to the front
+  let nonZeroIndex = 0;
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] !== 0){
+      nums[nonZeroIndex] = nums[i]
+      nonZeroIndex += 1;
+    }
+  }
+
+  // user the nonZeroIndex indicators to backfill the rest of the array with 0's where they belong (not swapping)
+  for (let i = nonZeroIndex; i < nums.length; i++) {
+      nums[i] = 0;
+  }
+
+  return nums
+};
+
