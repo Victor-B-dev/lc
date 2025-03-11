@@ -56,5 +56,15 @@ var findDifferentBinaryString = function(nums) {
       res.push(nums[i][i] === '0' ? '1' : '0');
   }
   return res.join("");
-
 };
+
+/* Hot it works - clever.
+It flips the input from the nums array on the diagonal such that any 0 becomes 1 and any 1 becomes 0 (see line 56).
+This guarantees that any string generated is different from an existing string instead of brute forcing every possibility.
+(Explaining the O(n), ah.)
+
+Wait why specifically the diagonal? That's the algorithm/the math truth.
+The diagonal is a unique pattern that is inherently different from the string we are constructing
+
+It's a tested theorem, super cool.
+*/
