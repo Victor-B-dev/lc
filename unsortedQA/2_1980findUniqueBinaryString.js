@@ -25,7 +25,24 @@ O(n)^2 solution as worst case.
 */
 
 // Backtracking - when a solution is generated it will end.
+var findDifferentBinaryStringBT = function (nums){
+  const stringSet = new Set(nums);
+  
+  const backtrack = (i , current) => {
+    if (i === nums.length){
+      const result = current.join("");
+      return stringSet.has(result) ? null : result;
+    }
 
+    let result = backtrack (i + 1, current);
+    if (result) return result;
+
+    current[i] = "1";
+    return backtrack(i + 1 , current);
+  };
+
+  return backtrack(0, Array(nums.length).fill("0"));
+}
 
 
 
