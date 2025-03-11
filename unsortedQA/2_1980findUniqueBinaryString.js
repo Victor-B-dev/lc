@@ -20,3 +20,23 @@ Explanation: "101" does not appear in nums. "000", "010", "100", and "110" would
 
 // One nice simple thing about this question is that any valid answer passes.
 
+/* Brute force solution would be to convert the nums array into a hashset, then check individually if it exists in the set.
+O(n)^2 solution as worst case.
+*/
+
+// Backtracking - when a solution is generated it will end.
+
+
+
+
+
+// Optimal Solution is Cantor's Diagonal Algorithm. Which is an O(n) time complexity.
+
+var findDifferentBinaryString = function(nums) {
+  let res = [];
+  for (let i = 0; i < nums.length; i++) {
+      res.push(nums[i][i] === '0' ? '1' : '0');
+  }
+  return res.join("");
+
+};
