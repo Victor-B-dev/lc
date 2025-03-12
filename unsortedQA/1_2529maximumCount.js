@@ -29,6 +29,8 @@ nums is sorted in a non-decreasing order.
 
 // tldr compare the count of pos #s to neg #s and return whats higher
 
+
+// Brute force - O(n) time
 var maximumCount = function(nums) {
   let negCount = 0;
   let posCount = 0;
@@ -40,3 +42,41 @@ var maximumCount = function(nums) {
 
   return Math.max(negCount, posCount)
 };
+
+// Binary Search - log n time (making use that this array is sorted)
+
+var maximumCountBS = function(nums){
+
+}
+
+/* This works because of how the data is grouped with all the negatives before the first 0, and all the positive after the last 0, with the 0's always being in the middle because the array is sorted.
+
+
+*/
+
+
+// Binary Search but less lines
+
+var binarySearchhelper = function(nums, target) {
+  let left = 0, right = nums.length - 1, result = nums.length; 
+  
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      result = mid;
+      right = mid - 1;
+    }
+  }
+  
+  return result; // this is a modified binary search that is looking for the first occurence of the target
+};
+
+var maximumCount = function(nums) {
+  let negCount = binarySearch(nums, 0);
+  let posCount = nums.length - binarySearch(nums, 1);
+  return Math.max(negCount, posCount);
+};
+
+
