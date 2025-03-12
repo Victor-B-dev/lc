@@ -29,3 +29,14 @@ nums is sorted in a non-decreasing order.
 
 // tldr compare the count of pos #s to neg #s and return whats higher
 
+var maximumCount = function(nums) {
+  let negCount = 0;
+  let posCount = 0;
+
+  for (let i = 0; i < nums.length; i++){
+      if (nums[i] < 0) negCount++;
+      if (nums[i] > 0) posCount++;
+  }
+
+  return Math.max(negCount, posCount)
+};
