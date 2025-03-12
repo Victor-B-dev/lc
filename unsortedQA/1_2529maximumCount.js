@@ -43,19 +43,8 @@ var maximumCount = function(nums) {
   return Math.max(negCount, posCount)
 };
 
-// Binary Search - log n time (making use that this array is sorted)
 
-var maximumCountBS = function(nums){
-
-}
-
-/* This works because of how the data is grouped with all the negatives before the first 0, and all the positive after the last 0, with the 0's always being in the middle because the array is sorted.
-
-
-*/
-
-
-// Binary Search but less lines
+// Binary Search
 
 var binarySearchhelper = function(nums, target) {
   let left = 0, right = nums.length - 1, result = nums.length; 
